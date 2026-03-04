@@ -20,9 +20,9 @@ export const HeroSection = () => {
                     {/* Adding subtle motion blur effect concept to bg */}
                     <div className="absolute inset-0 bg-gradient-to-tr from-b5-red/20 to-b5-blue/20 mix-blend-screen scale-110 blur-xl animate-pulse" />
                     <img
-                        src="https://images.unsplash.com/photo-1508344928928-7165b67de128?q=80&w=2070&auto=format&fit=crop"
-                        alt="Baseball Action"
-                        className="w-full h-full object-cover opacity-30 grayscale contrast-150 blur-[2px]"
+                        src="/fondo1.jpg"
+                        alt="Baseball5 Action"
+                        className="w-full h-full object-cover opacity-40 grayscale contrast-125 md:blur-[1px]"
                     />
                 </div>
             </motion.div>
