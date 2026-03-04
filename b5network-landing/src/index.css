@@ -17,15 +17,18 @@
 
 @layer utilities {
   .glass-card {
-    @apply bg-white/5 backdrop-blur-xl border border-white/10 shadow-[0_4px_30px_rgba(0, 0, 0, 0.1)];
+    @apply bg-white/5 backdrop-blur-xl border border-white/10;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   }
 
   .neon-text-red {
-    @apply text-b5-red drop-shadow-[0_0_10px_rgba(225, 0, 0, 0.8)];
+    @apply text-b5-red;
+    filter: drop-shadow(0 0 10px rgba(225, 0, 0, 0.8));
   }
 
   .text-neon-blue {
-    @apply text-b5-blue drop-shadow-[0_0_8px_rgba(0, 51, 255, 0.8)];
+    @apply text-b5-blue;
+    filter: drop-shadow(0 0 8px rgba(0, 51, 255, 0.8));
   }
 
   .glass-button {
