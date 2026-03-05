@@ -1,16 +1,48 @@
-import { motion, useScroll, useTransform } from 'framer-motion';
-import { useRef } from 'react';
+import { motion, useScroll, useTransform, useMotionValueEvent } from 'framer-motion';
+import { useRef, useState, useEffect } from 'react';
 
 export const TechStackGear = () => {
     const sectionRef = useRef<HTMLDivElement>(null);
+    const videoRef = useRef<HTMLVideoElement>(null);
+    const [duration, setDuration] = useState(0);
 
     const { scrollYProgress } = useScroll({
         target: sectionRef,
         offset: ["start end", "end start"]
     });
 
-    // Parallax effect for the background image container (moves slower than scroll)
-    const yBg = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
+    // Handle metadata loading to get actual duration
+    const handleLoadedMetadata = () => {
+        if (videoRef.current) {
+            setDuration(videoRef.current.duration);
+        }
+    };
+
+    // Scrub video synchronously with scroll
+    useMotionValueEvent(scrollYProgress, "change", (latest) => {
+        if (videoRef.current && duration > 0) {
+            // Apply smoothing with requestAnimationFrame
+            requestAnimationFrame(() => {
+                if (videoRef.current) {
+                    // Start playback earlier and finish mapping across scroll section
+                    // We use `latest` mapped directly to `duration`. 
+                    // Let's ensure the video fully plays through exactly when the section is scrolled past.
+                    videoRef.current.currentTime = latest * duration;
+                }
+            });
+        }
+    });
+
+    // Fallback: If metadata didn't fire in time, aggressively check it
+    useEffect(() => {
+        const checkDuration = setInterval(() => {
+            if (videoRef.current && videoRef.current.duration > 0 && duration === 0) {
+                setDuration(videoRef.current.duration);
+                clearInterval(checkDuration);
+            }
+        }, 500);
+        return () => clearInterval(checkDuration);
+    }, [duration]);
 
     // Entry effect for the central card
     const scale = useTransform(scrollYProgress, [0.3, 0.6], [0.8, 1]);
@@ -19,21 +51,29 @@ export const TechStackGear = () => {
     return (
         <section ref={sectionRef} id="gear" className="relative w-full min-h-screen py-32 bg-black overflow-hidden flex items-center justify-center border-t border-white/5">
 
-            {/* Parallax WebP Background Container */}
-            <motion.div
-                style={{ y: yBg }}
-                className="absolute inset-0 w-full h-[130%] -top-[15%] z-0 pointer-events-none"
+            {/* Scroll-Scrubbing Video Background Container (No vertical cut-off) */}
+            <div
+                className="absolute inset-0 w-full h-full z-0 pointer-events-none"
             >
-                <img
-                    src="https://cbpirchavephlgzxkbbb.supabase.co/storage/v1/object/public/videos/camera%20webp.webp"
-                    alt="Camera Components Floating"
-                    className="w-full h-full object-cover opacity-60 mix-blend-screen"
-                />
+                {/* 
+                  Using object-contain ensures the entire video is visible and not cropped.
+                  Changing to the MP4 file to support programmatic currentTime scrubbing. 
+                */}
+                <video
+                    ref={videoRef}
+                    muted
+                    playsInline
+                    preload="auto"
+                    onLoadedMetadata={handleLoadedMetadata}
+                    className="w-full h-full object-contain opacity-50 mix-blend-screen"
+                >
+                    <source src="https://cbpirchavephlgzxkbbb.supabase.co/storage/v1/object/public/videos/Camera_components_floating_apart_delpmaspu_.mp4" type="video/mp4" />
+                </video>
 
                 {/* Gradients to blend video smoothly into the section edges */}
                 <div className="absolute inset-0 bg-gradient-to-b from-black via-transparent to-black" />
                 <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-transparent to-black/80" />
-            </motion.div>
+            </div>
 
             {/* Grid Pattern Background Overlay */}
             <div
@@ -76,7 +116,7 @@ export const TechStackGear = () => {
                         transition={{ duration: 4, ease: "linear", repeat: Infinity }}
                     />
 
-                    {/* Replaced placeholder with an abstract digital effect over the video background */}
+                    {/* Abstract digital effect over the video background */}
                     <div className="absolute inset-0 mix-blend-overlay opacity-30 bg-[radial-gradient(circle_at_center,transparent_0%,#000000_100%)]" />
 
                     {/* Faux Hotspots / Data nodes */}
