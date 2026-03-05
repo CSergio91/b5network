@@ -9,6 +9,8 @@ export const openContactModal = () => {
 export const ContactModal = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [copied, setCopied] = useState(false);
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
 
     useEffect(() => {
         const handleOpen = () => setIsOpen(true);
@@ -22,11 +24,38 @@ export const ContactModal = () => {
         setTimeout(() => setCopied(false), 2000);
     };
 
-    const handleFormSubmit = (e: React.FormEvent) => {
+    const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        // Here you would normally handle the form submission via an API route or service like Formspree
-        alert("Formulario enviado. Nos pondremos en contacto pronto.");
-        setIsOpen(false);
+        setIsSubmitting(true);
+        setSubmitStatus('idle');
+
+        const formData = new FormData(e.currentTarget);
+
+        try {
+            // endpoint de prueba, el usuario debe crear uno en formspree.io
+            const response = await fetch("https://formspree.io/f/mqkenjrd", {
+                method: "POST",
+                body: formData,
+                headers: {
+                    Accept: "application/json",
+                },
+            });
+
+            if (response.ok) {
+                setSubmitStatus('success');
+                e.currentTarget.reset();
+                setTimeout(() => {
+                    setIsOpen(false);
+                    setSubmitStatus('idle');
+                }, 4000);
+            } else {
+                setSubmitStatus('error');
+            }
+        } catch (error) {
+            setSubmitStatus('error');
+        } finally {
+            setIsSubmitting(false);
+        }
     };
 
     return (
@@ -70,39 +99,62 @@ export const ContactModal = () => {
                                     Déjanos tus datos y nos comunicaremos contigo de inmediato.
                                 </p>
 
-                                <form onSubmit={handleFormSubmit} className="flex flex-col gap-4">
-                                    <div>
-                                        <input
-                                            type="text"
-                                            placeholder="Tu Nombre o Empresa"
-                                            required
-                                            className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white text-sm focus:outline-none focus:border-b5-red transition-colors"
-                                        />
-                                    </div>
-                                    <div>
-                                        <input
-                                            type="email"
-                                            placeholder="Tu Correo Electrónico"
-                                            required
-                                            className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white text-sm focus:outline-none focus:border-b5-red transition-colors"
-                                        />
-                                    </div>
-                                    <div>
-                                        <textarea
-                                            placeholder="¿En qué podemos ayudarte?"
-                                            required
-                                            rows={3}
-                                            className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white text-sm focus:outline-none focus:border-b5-red transition-colors resize-none"
-                                        />
-                                    </div>
-                                    <button
-                                        type="submit"
-                                        className="mt-2 w-full bg-b5-red hover:bg-red-700 text-white font-orbitron text-sm font-bold uppercase tracking-widest py-4 rounded-lg shadow-[0_0_15px_rgba(225,0,0,0.4)] transition-all flex items-center justify-center gap-2 group"
+                                {submitStatus === 'success' ? (
+                                    <motion.div
+                                        initial={{ opacity: 0, scale: 0.9 }}
+                                        animate={{ opacity: 1, scale: 1 }}
+                                        className="bg-green-500/10 border border-green-500/30 text-green-400 p-6 rounded-xl flex flex-col items-center justify-center text-center py-12"
                                     >
-                                        Enviar Mensaje
-                                        <Send size={16} className="group-hover:translate-x-1 transition-transform" />
-                                    </button>
-                                </form>
+                                        <Check size={48} className="mb-4" />
+                                        <h4 className="font-bold text-xl mb-2 font-orbitron tracking-wide">¡Mensaje Enviado!</h4>
+                                        <p className="text-sm opacity-80">Gracias por contactarnos. Nuestro equipo revisará los detalles y te responderá a la brevedad.</p>
+                                    </motion.div>
+                                ) : (
+                                    <form onSubmit={handleFormSubmit} className="flex flex-col gap-4">
+                                        <div>
+                                            <input
+                                                type="text"
+                                                name="name"
+                                                placeholder="Tu Nombre o Empresa"
+                                                required
+                                                className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white text-sm focus:outline-none focus:border-b5-red transition-colors"
+                                            />
+                                        </div>
+                                        <div>
+                                            <input
+                                                type="email"
+                                                name="email"
+                                                placeholder="Tu Correo Electrónico"
+                                                required
+                                                className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white text-sm focus:outline-none focus:border-b5-red transition-colors"
+                                            />
+                                        </div>
+                                        <div>
+                                            <textarea
+                                                name="message"
+                                                placeholder="¿En qué podemos ayudarte?"
+                                                required
+                                                rows={3}
+                                                className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white text-sm focus:outline-none focus:border-b5-red transition-colors resize-none"
+                                            />
+                                        </div>
+                                        <button
+                                            type="submit"
+                                            disabled={isSubmitting}
+                                            className={`mt-2 w-full font-orbitron text-sm font-bold uppercase tracking-widest py-4 rounded-lg transition-all flex items-center justify-center gap-2 group ${isSubmitting ? 'bg-white/10 text-white/50 cursor-not-allowed' : 'bg-b5-red hover:bg-red-700 text-white shadow-[0_0_15px_rgba(225,0,0,0.4)]'
+                                                }`}
+                                        >
+                                            {isSubmitting ? 'Enviando...' : 'Enviar Mensaje'}
+                                            {!isSubmitting && <Send size={16} className="group-hover:translate-x-1 transition-transform" />}
+                                        </button>
+
+                                        {submitStatus === 'error' && (
+                                            <p className="text-red-400 text-xs text-center mt-2">
+                                                Ocurrió un error al enviar el mensaje. Por favor intenta usando las Opciones Directas.
+                                            </p>
+                                        )}
+                                    </form>
+                                )}
                             </div>
 
                             {/* Quick Options Section */}
