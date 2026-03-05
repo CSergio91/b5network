@@ -43,9 +43,7 @@ export const TechStackGear = () => {
         return () => clearInterval(checkDuration);
     }, [duration]);
 
-    // Entry effect for the central card
-    const scale = useTransform(scrollYProgress, [0.3, 0.6], [0.8, 1]);
-    const yContent = useTransform(scrollYProgress, [0.3, 0.6], [100, 0]);
+    // We removed the central card entry effects since the card is being removed.
 
     return (
         <section ref={sectionRef} id="gear" className="relative w-full min-h-screen py-32 bg-black overflow-hidden flex items-center justify-center border-t border-white/5">
@@ -84,7 +82,7 @@ export const TechStackGear = () => {
             />
 
             <div className="max-w-7xl mx-auto px-6 relative z-20 w-full">
-                <div className="text-center mb-20">
+                <div className="text-center">
                     <motion.h2
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
@@ -103,39 +101,6 @@ export const TechStackGear = () => {
                         Hardware de nivel broadcast. Desde cámaras estabilizadas para seguimiento dinámico hasta BodyCams 360° para la experiencia inmersiva FPV.
                     </motion.p>
                 </div>
-
-                <motion.div
-                    style={{ scale, y: yContent }}
-                    className="relative w-full aspect-[21/9] min-h-[400px] bg-gradient-to-tr from-b5-black/80 via-[#0a0a0a]/80 to-b5-red/10 rounded-[3rem] border border-white/10 shadow-[0_0_100px_rgba(225,0,0,0.15)] overflow-hidden flex items-center justify-center backdrop-blur-sm group"
-                >
-                    {/* Holographic scanning effect */}
-                    <motion.div
-                        className="absolute left-0 w-full h-1 bg-b5-red/50 shadow-[0_0_20px_#E10000] z-20"
-                        animate={{ top: ['0%', '100%', '0%'] }}
-                        transition={{ duration: 4, ease: "linear", repeat: Infinity }}
-                    />
-
-                    {/* Abstract digital effect over the video background */}
-                    <div className="absolute inset-0 mix-blend-overlay opacity-30 bg-[radial-gradient(circle_at_center,transparent_0%,#000000_100%)]" />
-
-                    {/* Faux Hotspots / Data nodes */}
-                    <div className="absolute top-1/4 left-1/3 flex flex-col items-center gap-2 z-30 opacity-60 group-hover:opacity-100 transition-opacity">
-                        <div className="w-3 h-3 rounded-full bg-b5-red animate-ping" />
-                        <div className="w-2 h-2 rounded-full bg-b5-red absolute" />
-                        <span className="bg-black/80 backdrop-blur-md text-b5-red text-[10px] font-mono px-2 py-1 rounded border border-b5-red/30 uppercase tracking-widest mt-4">Broadcast Cam</span>
-                    </div>
-
-                    <div className="absolute bottom-1/3 right-1/4 flex flex-col items-center gap-2 z-30 opacity-60 group-hover:opacity-100 transition-opacity">
-                        <div className="w-3 h-3 rounded-full bg-b5-blue animate-ping" />
-                        <div className="w-2 h-2 rounded-full bg-b5-blue absolute" />
-                        <span className="bg-black/80 backdrop-blur-md text-b5-blue text-[10px] font-mono px-2 py-1 rounded border border-b5-blue/30 uppercase tracking-widest mt-4">FPV System</span>
-                    </div>
-
-                    {/* Tech data lines overlay */}
-                    <svg className="absolute inset-0 w-full h-full pointer-events-none opacity-20 z-10">
-                        <path d="M0,100 Q400,300 1000,50 T1000,100" fill="none" stroke="white" strokeWidth="1" strokeDasharray="5,5" />
-                    </svg>
-                </motion.div>
             </div>
         </section>
     );
