@@ -54,9 +54,9 @@ export const Navbar = () => {
                         ))}
                     </ul>
 
-                    <button className="bg-b5-red hover:bg-red-700 text-white font-orbitron text-xs font-bold uppercase tracking-widest px-6 py-2.5 rounded shadow-[0_0_15px_rgba(225,0,0,0.4)] transition-all active:scale-95">
-                        Acceso Red
-                    </button>
+                    <a href="mailto:info@b5network.com" className="bg-b5-red hover:bg-red-700 text-white font-orbitron text-xs font-bold uppercase tracking-widest px-6 py-2.5 rounded shadow-[0_0_15px_rgba(225,0,0,0.4)] transition-all active:scale-95 inline-block text-center cursor-pointer">
+                        Contacto
+                    </a>
                 </div>
 
                 {/* Mobile Toggle */}
@@ -89,9 +89,9 @@ export const Navbar = () => {
                             </li>
                         ))}
                     </ul>
-                    <button className="bg-b5-red text-white w-full font-orbitron text-sm font-bold uppercase tracking-widest px-6 py-3 rounded shadow-[0_0_15px_rgba(225,0,0,0.4)]">
-                        Acceso Red
-                    </button>
+                    <a href="mailto:info@b5network.com" className="bg-b5-red text-white w-full font-orbitron text-sm font-bold uppercase tracking-widest px-6 py-3 rounded shadow-[0_0_15px_rgba(225,0,0,0.4)] block text-center mt-4">
+                        Contacto
+                    </a>
                 </motion.div>
             )}
         </nav>

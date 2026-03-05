@@ -79,27 +79,22 @@ export const Footer = () => {
                         </ul>
                     </div>
 
-                    {/* Newsletter Col */}
+                    {/* Contact Col */}
                     <div className="lg:col-span-1 border border-white/5 bg-white/5 backdrop-blur-md rounded-2xl p-6 relative overflow-hidden group">
                         {/* Neon glow effect on hover */}
                         <div className="absolute inset-0 bg-gradient-to-tr from-b5-red/0 to-b5-blue/0 group-hover:from-b5-red/10 group-hover:to-b5-blue/10 transition-all duration-700 pointer-events-none" />
 
-                        <h4 className="text-white font-orbitron text-sm font-bold uppercase tracking-widest mb-2 relative z-10">Network Access</h4>
-                        <p className="text-white/40 text-xs mb-6 relative z-10">Únete a nuestra lista prioritaria para acceso anticipado a las herramientas de transmisión.</p>
+                        <h4 className="text-white font-orbitron text-sm font-bold uppercase tracking-widest mb-2 relative z-10">Contacto Directo</h4>
+                        <p className="text-white/40 text-xs mb-6 relative z-10">Cotiza tu Landing Page o servicio de Cobertura Audiovisual. Estamos listos para elevar tu marca.</p>
 
-                        <form className="relative z-10 flex flex-col gap-3">
-                            <input
-                                type="email"
-                                placeholder="DIRECCIÓN DE CORREO"
-                                className="w-full bg-black/50 border border-white/10 rounded-lg px-4 py-3 text-white text-sm focus:outline-none focus:border-b5-red transition-colors font-mono placeholder:text-white/20"
-                            />
-                            <button
-                                type="submit"
-                                className="w-full bg-b5-red hover:bg-red-700 text-white font-orbitron text-xs font-bold uppercase tracking-widest px-4 py-3 rounded-lg shadow-[0_0_15px_rgba(225,0,0,0.4)] transition-all"
+                        <div className="relative z-10 flex flex-col gap-3">
+                            <a
+                                href="mailto:info@b5network.com"
+                                className="w-full bg-b5-red hover:bg-red-700 text-white font-orbitron text-xs font-bold uppercase tracking-widest px-4 py-3 rounded-lg shadow-[0_0_15px_rgba(225,0,0,0.4)] transition-all text-center block"
                             >
-                                Solicitar Acceso
-                            </button>
-                        </form>
+                                Hablemos de tu Proyecto
+                            </a>
+                        </div>
                     </div>
 
                 </div>
