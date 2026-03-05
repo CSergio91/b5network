@@ -1,10 +1,10 @@
 import { Twitter, Instagram, Youtube, PlaySquare, ArrowUpRight } from 'lucide-react';
+import { openContactModal } from './ContactModal';
 
 const SOCIAL_LINKS = [
-    { name: '@b5network', icon: <Instagram size={20} />, href: 'https://instagram.com/b5network' },
+    { name: 'Instagram', icon: <Instagram size={20} />, href: 'https://instagram.com/b5network' },
     { name: 'YouTube', icon: <Youtube size={20} />, href: '#' },
     { name: 'TikTok', icon: <PlaySquare size={20} />, href: '#' },
-    { name: 'X (Twitter)', icon: <Twitter size={20} />, href: '#' },
 ];
 
 const LEGAL_LINKS = [
@@ -42,9 +42,9 @@ export const Footer = () => {
                         <p className="text-white/40 text-sm font-medium leading-relaxed mb-4">
                             Agencia de Marketing Deportivo y Producción Audiovisual. Elevando la presencia digital de Clubes, Negocios y Eventos Deportivos.
                         </p>
-                        <a href="mailto:info@b5network.com" className="inline-block text-b5-red font-mono text-sm hover:text-white transition-colors duration-300">
+                        <button onClick={openContactModal} className="inline-block text-b5-red font-mono text-sm hover:text-white transition-colors duration-300">
                             info@b5network.com
-                        </a>
+                        </button>
                     </div>
 
                     {/* Socials Col */}
@@ -88,12 +88,12 @@ export const Footer = () => {
                         <p className="text-white/40 text-xs mb-6 relative z-10">Cotiza tu Landing Page o servicio de Cobertura Audiovisual. Estamos listos para elevar tu marca.</p>
 
                         <div className="relative z-10 flex flex-col gap-3">
-                            <a
-                                href="mailto:info@b5network.com"
+                            <button
+                                onClick={openContactModal}
                                 className="w-full bg-b5-red hover:bg-red-700 text-white font-orbitron text-xs font-bold uppercase tracking-widest px-4 py-3 rounded-lg shadow-[0_0_15px_rgba(225,0,0,0.4)] transition-all text-center block"
                             >
                                 Hablemos de tu Proyecto
-                            </a>
+                            </button>
                         </div>
                     </div>
 

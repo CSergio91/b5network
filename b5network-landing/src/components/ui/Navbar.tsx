@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import { useState } from 'react';
+import { openContactModal } from './ContactModal';
 
 const NAV_LINKS = [
     { label: 'Inicio', href: '#inicio' },
@@ -54,9 +55,9 @@ export const Navbar = () => {
                         ))}
                     </ul>
 
-                    <a href="mailto:info@b5network.com" className="bg-b5-red hover:bg-red-700 text-white font-orbitron text-xs font-bold uppercase tracking-widest px-6 py-2.5 rounded shadow-[0_0_15px_rgba(225,0,0,0.4)] transition-all active:scale-95 inline-block text-center cursor-pointer">
+                    <button onClick={openContactModal} className="bg-b5-red hover:bg-red-700 text-white font-orbitron text-xs font-bold uppercase tracking-widest px-6 py-2.5 rounded shadow-[0_0_15px_rgba(225,0,0,0.4)] transition-all active:scale-95 inline-block text-center cursor-pointer">
                         Contacto
-                    </a>
+                    </button>
                 </div>
 
                 {/* Mobile Toggle */}
@@ -89,9 +90,9 @@ export const Navbar = () => {
                             </li>
                         ))}
                     </ul>
-                    <a href="mailto:info@b5network.com" className="bg-b5-red text-white w-full font-orbitron text-sm font-bold uppercase tracking-widest px-6 py-3 rounded shadow-[0_0_15px_rgba(225,0,0,0.4)] block text-center mt-4">
+                    <button onClick={() => { setIsOpen(false); openContactModal(); }} className="bg-b5-red text-white w-full font-orbitron text-sm font-bold uppercase tracking-widest px-6 py-3 rounded shadow-[0_0_15px_rgba(225,0,0,0.4)] block text-center mt-4">
                         Contacto
-                    </a>
+                    </button>
                 </motion.div>
             )}
         </nav>
