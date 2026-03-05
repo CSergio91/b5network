@@ -1,4 +1,4 @@
-import { Twitter, Instagram, Youtube, PlaySquare, ArrowUpRight } from 'lucide-react';
+import { Instagram, Youtube, PlaySquare, ArrowUpRight } from 'lucide-react';
 import { openContactModal } from './ContactModal';
 
 const SOCIAL_LINKS = [
