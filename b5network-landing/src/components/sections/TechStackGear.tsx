@@ -1,4 +1,4 @@
-import { motion, useScroll, useTransform, useMotionValueEvent, useSpring } from 'framer-motion';
+import { motion, useScroll, useMotionValueEvent, useSpring } from 'framer-motion';
 import { useRef, useState, useEffect } from 'react';
 
 export const TechStackGear = () => {
