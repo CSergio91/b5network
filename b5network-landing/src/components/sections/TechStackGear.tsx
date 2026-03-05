@@ -9,7 +9,7 @@ export const TechStackGear = () => {
         offset: ["start end", "end start"]
     });
 
-    // Parallax effect for the background video (moves slower than scroll)
+    // Parallax effect for the background image container (moves slower than scroll)
     const yBg = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
 
     // Entry effect for the central card
@@ -19,20 +19,16 @@ export const TechStackGear = () => {
     return (
         <section ref={sectionRef} id="gear" className="relative w-full min-h-screen py-32 bg-black overflow-hidden flex items-center justify-center border-t border-white/5">
 
-            {/* Parallax Video Background Container */}
+            {/* Parallax WebP Background Container */}
             <motion.div
                 style={{ y: yBg }}
                 className="absolute inset-0 w-full h-[130%] -top-[15%] z-0 pointer-events-none"
             >
-                <video
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
-                    className="w-full h-full object-cover opacity-40 mix-blend-screen"
-                >
-                    <source src="https://cbpirchavephlgzxkbbb.supabase.co/storage/v1/object/public/videos/Camera_components_floating_apart_delpmaspu_.mp4" type="video/mp4" />
-                </video>
+                <img
+                    src="https://cbpirchavephlgzxkbbb.supabase.co/storage/v1/object/public/videos/camera%20webp.webp"
+                    alt="Camera Components Floating"
+                    className="w-full h-full object-cover opacity-60 mix-blend-screen"
+                />
 
                 {/* Gradients to blend video smoothly into the section edges */}
                 <div className="absolute inset-0 bg-gradient-to-b from-black via-transparent to-black" />
