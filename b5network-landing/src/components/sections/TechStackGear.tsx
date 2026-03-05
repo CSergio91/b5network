@@ -1,4 +1,4 @@
-import { motion, useScroll, useTransform, useMotionValueEvent } from 'framer-motion';
+import { motion, useScroll, useTransform, useMotionValueEvent, useSpring } from 'framer-motion';
 import { useRef, useState, useEffect } from 'react';
 
 export const TechStackGear = () => {
@@ -11,6 +11,13 @@ export const TechStackGear = () => {
         offset: ["start end", "end start"]
     });
 
+    // Añade física tipo spring para que el scroll manual (rueda del ratón) se traduzca en movimiento fluido
+    const smoothProgress = useSpring(scrollYProgress, {
+        stiffness: 50,
+        damping: 20,
+        restDelta: 0.001
+    });
+
     // Handle metadata loading to get actual duration
     const handleLoadedMetadata = () => {
         if (videoRef.current) {
@@ -18,18 +25,10 @@ export const TechStackGear = () => {
         }
     };
 
-    // Scrub video synchronously with scroll
-    useMotionValueEvent(scrollYProgress, "change", (latest) => {
+    // Scrub video synchronously but smoothly with spring physics
+    useMotionValueEvent(smoothProgress, "change", (latest) => {
         if (videoRef.current && duration > 0) {
-            // Apply smoothing with requestAnimationFrame
-            requestAnimationFrame(() => {
-                if (videoRef.current) {
-                    // Start playback earlier and finish mapping across scroll section
-                    // We use `latest` mapped directly to `duration`. 
-                    // Let's ensure the video fully plays through exactly when the section is scrolled past.
-                    videoRef.current.currentTime = latest * duration;
-                }
-            });
+            videoRef.current.currentTime = latest * duration;
         }
     });
 
