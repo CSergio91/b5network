@@ -1,5 +1,7 @@
 
 import { HeroSection } from './components/sections/HeroSection'
+import { ServicesSection } from './components/sections/ServicesSection'
+import { SportsGallery } from './components/sections/SportsGallery'
 import { TechStackGear } from './components/sections/TechStackGear'
 import { MulticamSimulator } from './components/sections/MulticamSimulator'
 import { PodcastHub } from './components/sections/PodcastHub'
@@ -16,6 +18,8 @@ function App() {
 
       <main>
         <HeroSection />
+        <ServicesSection />
+        <SportsGallery />
         <TechStackGear />
         <MulticamSimulator />
         <PodcastHub />

@@ -7,7 +7,7 @@ export const HeroSection = () => {
     const opacity = useTransform(scrollY, [0, 500], [1, 0]);
 
     return (
-        <section className="relative h-screen w-full overflow-hidden bg-black flex items-center justify-center">
+        <section id="inicio" className="relative h-screen w-full overflow-hidden bg-black flex items-center justify-center">
             {/* Background Deep Blur & Vignette */}
             <div className="absolute inset-0 z-10 bg-[radial-gradient(circle_at_center,transparent_0%,#000000_100%)] opacity-80 mix-blend-multiply" />
 
@@ -72,7 +72,7 @@ export const HeroSection = () => {
                     transition={{ delay: 0.6, duration: 1 }}
                     className="mt-8 text-white/50 font-inter text-lg md:text-xl max-w-2xl font-medium"
                 >
-                    Cobertura inmersiva en primera persona. Multi-cámara en vivo. La revolución tecnológica del Baseball5 ha comenzado.
+                    Agencia de Marketing y Producción Tech Deportiva. Cobertura inmersiva multi-cámara FPV y creación de Landing Pages premium para Clubes y Negocios. Desde Football hasta Baseball5.
                 </motion.p>
             </div>
 

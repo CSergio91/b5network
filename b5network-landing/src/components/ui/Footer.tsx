@@ -1,8 +1,8 @@
 import { Twitter, Instagram, Youtube, PlaySquare, ArrowUpRight } from 'lucide-react';
 
 const SOCIAL_LINKS = [
+    { name: '@b5network', icon: <Instagram size={20} />, href: 'https://instagram.com/b5network' },
     { name: 'YouTube', icon: <Youtube size={20} />, href: '#' },
-    { name: 'Instagram', icon: <Instagram size={20} />, href: '#' },
     { name: 'TikTok', icon: <PlaySquare size={20} />, href: '#' },
     { name: 'X (Twitter)', icon: <Twitter size={20} />, href: '#' },
 ];
@@ -39,9 +39,12 @@ export const Footer = () => {
                                 B5 <span className="text-b5-red">Network</span>
                             </span>
                         </div>
-                        <p className="text-white/40 text-sm font-medium leading-relaxed mb-8">
-                            La plataforma definitiva de retransmisión deportiva para Baseball5. Tecnología FPV, analíticas en tiempo real y conectividad global.
+                        <p className="text-white/40 text-sm font-medium leading-relaxed mb-4">
+                            Agencia de Marketing Deportivo y Producción Audiovisual. Elevando la presencia digital de Clubes, Negocios y Eventos Deportivos.
                         </p>
+                        <a href="mailto:info@b5network.com" className="inline-block text-b5-red font-mono text-sm hover:text-white transition-colors duration-300">
+                            info@b5network.com
+                        </a>
                     </div>
 
                     {/* Socials Col */}

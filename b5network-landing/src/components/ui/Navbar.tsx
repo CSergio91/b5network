@@ -3,10 +3,10 @@ import { Menu, X } from 'lucide-react';
 import { useState } from 'react';
 
 const NAV_LINKS = [
-    { label: 'Inicio', href: '#' },
-    { label: 'Cobertura', href: '#' },
-    { label: 'El Gear', href: '#' },
-    { label: 'B5 Sessions', href: '#' },
+    { label: 'Inicio', href: '#inicio' },
+    { label: 'Servicios', href: '#servicios' },
+    { label: 'Galería', href: '#galeria' },
+    { label: 'El Gear', href: '#gear' },
 ];
 
 export const Navbar = () => {
