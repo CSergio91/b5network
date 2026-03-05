@@ -10,7 +10,7 @@ const IMAGES = [
         delay: 0.1
     },
     {
-        src: "https://images.unsplash.com/photo-1518605368461-1ee7c532066d?q=80&w=2000&auto=format&fit=crop",
+        src: "https://images.unsplash.com/photo-1579952363873-27f3bade9f55?q=80&w=2070&auto=format&fit=crop",
         title: "Elite Football",
         colSpan: "md:col-span-1",
         rowSpan: "md:row-span-1",
